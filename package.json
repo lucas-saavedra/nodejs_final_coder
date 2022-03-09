@@ -1,0 +1,27 @@
+{
+  "name": "nodejs_final_coder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "startDev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucas-saavedra/nodejs_final_coder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucas-saavedra/nodejs_final_coder/issues"
+  },
+  "homepage": "https://github.com/lucas-saavedra/nodejs_final_coder#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
