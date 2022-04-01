@@ -20,7 +20,6 @@ const addProductController = async (req, res, next) => {
         const result = await productsDao.insert({ ...req.body });
         res.json({ success: true, result })
     } catch (error) {
-        console.log(error);
         next(error)
     }
 }
@@ -28,19 +27,19 @@ const updProductController = async (req, res, next) => {
     try {
         const id = req.params.id;
         const result = await productsDao.updateById(id, { ...req.body });
-        return res.json({ success: true, result })
+        return res.json({ success: true, result });
     } catch (error) {
-        next(error)
+        next(error);
     }
 
 }
 const deleteProductController = async (req, res, next) => {
     try {
         const id = req.params.id;
-        const result = await productsDao.deleteById(id);
-        return res.json({ success: true, result: 'Document successefully deleted' })
+        await productsDao.deleteById(id);
+        return res.json({ success: true, result: 'Document successefully deleted' });
     } catch (error) {
-        next(error)
+        next(error);
     }
 }
 export {

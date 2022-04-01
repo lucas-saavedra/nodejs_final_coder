@@ -14,4 +14,4 @@ class CarritosDaoMongoDb extends MongoContainer {
     }
 }
 
-export default  CarritosDaoMongoDb ;
+export default CarritosDaoMongoDb;

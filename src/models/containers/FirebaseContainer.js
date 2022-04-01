@@ -9,30 +9,37 @@ class FirebaseContainer {
         this.query = db.collection(coll)
     }
     connectToDb() {
-        admin.initializeApp({
-            credential: admin.credential.cert(config.DB_CONFIG.firebase.credential)
-        });
+
+        if (!admin.apps.length) {
+            admin.initializeApp({
+                credential: admin.credential.cert(config.DB_CONFIG.firebase.credential)
+            });
+        }
         console.log('Connected to Firestore!');
     }
     async getAll() {
         const docRef = await this.query.get();
         const documents = docRef.docs;
         return documents.map(document => ({
-            id: document.id,
+            _id: document.id,
             ...document.data()
         }))
     }
     async getById(id) {
         const docRef = this.query.doc(id);
-        if (!docRef) {
+        const document = await docRef.get();
+        if (!document.data() || !docRef) {
             throw new Error('[NOT_FOUND] => The requested resource does not exist!');
         }
-        const document = await docRef.get();
-        return document.data();
+        return { _id: document.id, ...document.data() };
     }
     async insert(element) {
         const docRef = this.query.doc();
-        return await docRef.set(element);
+        if (!docRef) {
+            throw new Error('[NOT_FOUND] => The requested resource does not exist!');
+        }
+        await docRef.create(element);
+        return await this.getById(docRef.id)
     }
 
     async updateById(id, element) {
@@ -40,12 +47,13 @@ class FirebaseContainer {
         if (!docRef) {
             throw new Error('[NOT_FOUND] => The requested resource does not exist!');
         }
-        return await docRef.update(element);
+        await docRef.update(element);
+        return await this.getById(docRef.id);
     }
     async deleteById(id) {
-
         const docRef = this.query.doc(id);
-        if (!docRef) {
+        const document = await docRef.get()
+        if (!document.data()) {
             throw new Error('[NOT_FOUND] => The requested resource does not exist!');
         }
         return await docRef.delete();

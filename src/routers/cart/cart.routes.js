@@ -9,9 +9,9 @@ import {
 } from '../../controllers/carts.controller.js';
 
 cartRouter.get('/', newCartController);
-cartRouter.get('/:id/productos', getCartByIdController);
 cartRouter.post('/:id/productos', addNewProductToCartController);
-cartRouter.delete('/:id', deleteCartByIdController);
+cartRouter.get('/:id/productos', getCartByIdController);
 cartRouter.delete('/:id/productos/:id_prod', delProductFromCartByIdsController);
+cartRouter.delete('/:id', deleteCartByIdController);
 
 export default cartRouter;
