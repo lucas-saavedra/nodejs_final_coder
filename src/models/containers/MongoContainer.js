@@ -1,13 +1,10 @@
 import mongoose from "mongoose";
-import config from "../../config.js";
 class MongoContainer {
     constructor(collection, schema) {
-        this.connectToDb().then(() => console.log('Mongodb connected!'));
         this.model = mongoose.model(collection, schema);
     }
-    async connectToDb() { await mongoose.connect(config.DB_CONFIG.mongodb.uri); }
-    async getAll() {
-        const documents = await this.model.find({}, { __v: 0 }).lean();
+    async getAll(filter = {}) {
+        const documents = await this.model.find(filter, { __v: 0 }).lean();
         return documents;
     }
     async getById(id) {

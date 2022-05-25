@@ -1,7 +1,9 @@
-import CarritosDao from '../models/daos/index.js';
 
-const carritosDao = new CarritosDao.CarritosDao();
-
+import daos from '../../models/daos/index.js'
+import transporter from '../../services/nodemailer.js';
+import ejs from 'ejs'
+const carritosDao = new daos.CarritosDaoMongoDb();
+const adminEmail = 'lucassaavedra50@gmail.com';
 const newCartController = async (req, res, next) => {
     try {
         const result = await carritosDao.insert({ timestamp: Date.now(), products: [] });
@@ -78,9 +80,38 @@ const delProductFromCartByIdsController = async (req, res, next) => {
     }
 }
 
+
+// Hice una ruta que procese la compra del usuario, pero nose como obtener informacion del usuario,
+//ya que no la puedo obtener por el "req", nose porque
+const checkoutCartController = async (req, res, next) => {
+    let message = {};
+    try {
+        if (req.params.id) {
+            const id = req.params.id;
+            const result = await carritosDao.populateCart(id)
+            const products = result.products;
+            ejs.renderFile('src/views/productList.ejs', { products }, (err, str) => {
+                message = {
+                    from: "Servidor de node",
+                    to: adminEmail,
+                    subject: `Nuevo compra de ${req.user.name} => de ${req.user.email}`,
+                    html: str
+                }
+            });
+            res.send(result)
+            const info = await transporter.sendMail(message);
+        } else {
+            throw new Error('Id not defined')
+        }
+    } catch (error) {
+        next(error);
+    }
+}
+
 export {
     newCartController,
     getCartByIdController,
+    checkoutCartController,
     addNewProductToCartController,
     deleteCartByIdController,
     delProductFromCartByIdsController

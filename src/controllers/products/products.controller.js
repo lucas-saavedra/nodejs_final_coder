@@ -1,5 +1,6 @@
-import ProductosDao from '../models/daos/index.js';
-const productsDao = new ProductosDao.ProductosDao();
+import daos from '../../models/daos/index.js'
+
+const productsDao = new daos.ProductosDaoMongoDb();
 const getProductsController = async (req, res, next) => {
     try {
         let result;
