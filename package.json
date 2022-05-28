@@ -38,5 +38,8 @@
     "twilio": "^3.77.1",
     "uuid": "^8.3.2",
     "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.1.0"
   }
 }

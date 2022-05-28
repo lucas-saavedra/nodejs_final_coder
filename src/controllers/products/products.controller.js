@@ -1,5 +1,5 @@
 import daos from '../../models/daos/index.js'
-
+import { faker } from '@faker-js/faker';
 const productsDao = new daos.ProductosDaoMongoDb();
 const getProductsController = async (req, res, next) => {
     try {
@@ -43,7 +43,29 @@ const deleteProductController = async (req, res, next) => {
         next(error);
     }
 }
+const populateProducts = async (req, res, next) => {
+    try {
+        for (let index = 0; index < 5; index++) {
+            let mockUpProduct = {
+                titulo: faker.commerce.product(),
+                descripcion: faker.commerce.productDescription(),
+                foto: faker.image.food(),
+                codigo: faker.random.alphaNumeric(5),
+                precio: faker.commerce.price(),
+                stock: faker.random.numeric(),
+            }
+            await productsDao.insert({ ...mockUpProduct });
+        }
+        return res.json({ success: true, result: 'Pupulated' });
+    } catch (error) {
+        next(error);
+    }
+
+
+
+}
 export {
+    populateProducts,
     getProductsController,
     addProductController,
     updProductController,

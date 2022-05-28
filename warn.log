@@ -5,3 +5,4 @@
 [2022-05-27T21:54:39.741] [WARN] warning - [POST]=> /logout 
 [2022-05-27T21:55:02.938] [WARN] warning - [POST]=> /logout 
 [2022-05-27T21:55:11.547] [WARN] warning - [GET]=> /register-error 
+[2022-05-28T18:44:41.835] [WARN] warning - [POST]=> //api/productos/populate 
