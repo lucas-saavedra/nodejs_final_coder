@@ -1,7 +1,10 @@
 
 import daos from '../../models/daos/index.js'
-import transporter from '../../services/nodemailer.js';
+
 import ejs from 'ejs'
+import client from '../../services/twilio.js';
+import config from '../../../config.js';
+
 const carritosDao = new daos.CarritosDaoMongoDb();
 const adminEmail = 'lucassaavedra50@gmail.com';
 const newCartController = async (req, res, next) => {
@@ -81,8 +84,6 @@ const delProductFromCartByIdsController = async (req, res, next) => {
 }
 
 
-// Hice una ruta que procese la compra del usuario, pero nose como obtener informacion del usuario,
-//ya que no la puedo obtener por el "req", nose porque
 const checkoutCartController = async (req, res, next) => {
     let message = {};
     try {
@@ -90,6 +91,20 @@ const checkoutCartController = async (req, res, next) => {
             const id = req.params.id;
             const result = await carritosDao.populateCart(id)
             const products = result.products;
+            client.messages
+                .create({
+                    body: 'Tu pedido con el ID :' + id + ' ha sido recibido y se encuentra en proceso',
+                    messagingServiceSid: config.twilio_cfg.messagingServiceSid,
+                    to: `${req.user.phone}`
+                })
+                .done();
+            client.messages
+                .create({
+                    body: `Nuevo compra de ${req.user.name} => email ${req.user.email}`,
+                    from: 'whatsapp:+14155238886',
+                    to: 'whatsapp:+5493456620180'
+                })
+                .done();
             ejs.renderFile('src/views/productList.ejs', { products }, (err, str) => {
                 message = {
                     from: "Servidor de node",
@@ -98,8 +113,7 @@ const checkoutCartController = async (req, res, next) => {
                     html: str
                 }
             });
-            res.send(result)
-            const info = await transporter.sendMail(message);
+            res.send({ result: 'OK' })
         } else {
             throw new Error('Id not defined')
         }

@@ -23,7 +23,8 @@ const {
 } = args;
 const twilio_cfg = {
   accountSid: process.env.ACCOUNT_SID,
-  authToken: process.env.AUTH_TOKEN
+  authToken: process.env.AUTH_TOKEN,
+  messagingServiceSid: process.env.MS_ID
 }
 
 const GMAIL = {

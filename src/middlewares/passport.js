@@ -3,7 +3,7 @@ import Local from 'passport-local';
 import bcrypt from 'bcrypt';
 import daos from '../models/daos/index.js';
 import transporter from '../services/nodemailer.js';
-import client from '../services/twilio.js';
+import ejs from 'ejs'
 const adminEmail = 'lucassaavedra50@gmail.com';
 const User = new daos.UserDaoMongoDb();
 const salt = () => bcrypt.genSaltSync(10);
@@ -48,61 +48,22 @@ passport.use('register', new Local.Strategy({
             }
 
             const user = await User.createUser(userObj);
-
-            client.messages
-                .create({
-                    body: 'Your appointment is coming up on July 21 at 3PM',
-                    from: 'whatsapp:+14155238886',
-                    to: 'whatsapp:+5493456620180'
-                })
-                .then(message => console.log(message.sid))
-                .done();
-            /* client.messages
-                .create({
-                    body: `
-                      ${user.name}
-                        ${user.email}
-                        ${user.adress}
-                        ${user.phone}
-                  `,
-                    messagingServiceSid: 'MG541c60cbcb0095784710994fd895e772',
-                    to: user.phone
-                })
-                .then(message => console.log(message.sid))
-                .done();
- */
-
-
-
-
-            let message = {
-                // Comma separated list of recipients
-                from: "Servidor de node",
-                to: adminEmail,
-                // Subject of the message
-                subject: 'Nuevo registro',
-                // HTML body
-                html: `
-                <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">
-                  ${user.name}
-                  </h5>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Email: ${user.email}
-                    </li>
-                    <li class="list-group-item">Direccion: ${user.adress}
-                    </li>
-                    <li class="list-group-item">Telefono: ${user.phone}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              `
-            }
-
-            const info = await transporter.sendMail(message)
-            console.log(info)
+            let message = {};
+            ejs.renderFile('src/views/profile.ejs', { user }, (err, str) => {
+                message = {
+                    // Comma separated list of recipients
+                    from: "Servidor de node",
+                    to: adminEmail,
+                    // Subject of the message
+                    subject: 'Nuevo registro',
+                    // HTML body
+                    html: str
+                }
+                if (err) {
+                    console.log(err);
+                }
+            })
+            await transporter.sendMail(message)
             return done(null, user);
         } catch (error) {
             return done(error);
