@@ -37,9 +37,7 @@
     "passport-local": "^1.0.0",
     "twilio": "^3.77.1",
     "uuid": "^8.3.2",
-    "yargs": "^17.5.1"
-  },
-  "devDependencies": {
+    "yargs": "^17.5.1",
     "@faker-js/faker": "^7.1.0"
   }
 }
