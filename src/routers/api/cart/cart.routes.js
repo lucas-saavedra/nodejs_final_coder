@@ -11,7 +11,7 @@ import {
 } from '../../../controllers/cart/carts.controller.js';
 
 
-cartRoutes.get('/', newCartController);
+cartRoutes.post('/', newCartController);
 cartRoutes.post('/:id/productos', addNewProductToCartController);
 cartRoutes.get('/:id/productos', getCartByIdController);
 

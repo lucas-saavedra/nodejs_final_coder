@@ -43,7 +43,8 @@ const deleteProductController = async (req, res, next) => {
         next(error);
     }
 }
-const populateProducts = async (req, res, next) => {
+const generateProducts = async (req, res, next) => {
+    //genera una lista de 5 productos falsos
     try {
         for (let index = 0; index < 5; index++) {
             let mockUpProduct = {
@@ -56,16 +57,14 @@ const populateProducts = async (req, res, next) => {
             }
             await productsDao.insert({ ...mockUpProduct });
         }
-        return res.json({ success: true, result: 'Pupulated' });
+        return res.json({ success: true, result: 'Generated' });
     } catch (error) {
         next(error);
     }
 
-
-
 }
 export {
-    populateProducts,
+    generateProducts,
     getProductsController,
     addProductController,
     updProductController,

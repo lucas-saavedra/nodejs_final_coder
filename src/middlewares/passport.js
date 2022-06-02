@@ -2,9 +2,8 @@ import passport from 'passport';
 import Local from 'passport-local';
 import bcrypt from 'bcrypt';
 import daos from '../models/daos/index.js';
-import transporter from '../services/nodemailer.js';
-import ejs from 'ejs'
-const adminEmail = 'lucassaavedra50@gmail.com';
+import {sendConfirmationEmail} from '../services/nodemailer.js';
+
 const User = new daos.UserDaoMongoDb();
 const salt = () => bcrypt.genSaltSync(10);
 const createHash = (password) => bcrypt.hashSync(password, salt());
@@ -48,22 +47,7 @@ passport.use('register', new Local.Strategy({
             }
 
             const user = await User.createUser(userObj);
-            let message = {};
-            ejs.renderFile('src/views/profile.ejs', { user }, (err, str) => {
-                message = {
-                    // Comma separated list of recipients
-                    from: "Servidor de node",
-                    to: adminEmail,
-                    // Subject of the message
-                    subject: 'Nuevo registro',
-                    // HTML body
-                    html: str
-                }
-                if (err) {
-                    console.log(err);
-                }
-            })
-            await transporter.sendMail(message)
+            await sendConfirmationEmail(user);
             return done(null, user);
         } catch (error) {
             return done(error);

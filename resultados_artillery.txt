@@ -1,0 +1,6 @@
+Comando usado
+artillery quick --count 50 -n 40 http://localhost:8080/api/productos/ > result_{fork|cluster}.text
+
+Con el uso de cluster se nota una ligera mejora en el acceso a las peticiones,
+un se restan algunos cientos de milisegundos, 
+pero la brecha no es tan grande de todas maneras.

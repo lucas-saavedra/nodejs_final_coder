@@ -1,18 +1,14 @@
 
 import daos from '../../models/daos/index.js'
-
-import ejs from 'ejs'
-import client from '../../services/twilio.js';
-import config from '../../../config.js';
-
+import { sendBuyConfirmationEmail } from '../../services/nodemailer.js';
+import { sendSmsBuyConfirmation, sendWspBuyConfirmation } from '../../services/twilio.js';
 const carritosDao = new daos.CarritosDaoMongoDb();
-const adminEmail = 'lucassaavedra50@gmail.com';
 const newCartController = async (req, res, next) => {
     try {
         const result = await carritosDao.insert({ timestamp: Date.now(), products: [] });
-        res.json({ success: true, result })
+        res.json({ success: true, result });
     } catch (error) {
-        next(error)
+        next(error);
     }
 }
 const getCartByIdController = async (req, res, next) => {
@@ -20,9 +16,9 @@ const getCartByIdController = async (req, res, next) => {
         if (req.params.id) {
             const id = req.params.id;
             const result = await carritosDao.getById(id);
-            res.json({ success: true, result })
+            res.json({ success: true, result });
         } else {
-            throw new Error('Id not defined')
+            throw new Error('Id not defined');
         }
     } catch (error) {
         next(error);
@@ -85,34 +81,17 @@ const delProductFromCartByIdsController = async (req, res, next) => {
 
 
 const checkoutCartController = async (req, res, next) => {
-    let message = {};
     try {
         if (req.params.id) {
+            // id del carrito 
             const id = req.params.id;
-            const result = await carritosDao.populateCart(id)
+            //populo el carrito con los productos referenciados de la base de dato de mongo
+            const result = await carritosDao.populateCart(id);
             const products = result.products;
-            client.messages
-                .create({
-                    body: 'Tu pedido con el ID :' + id + ' ha sido recibido y se encuentra en proceso',
-                    messagingServiceSid: config.twilio_cfg.messagingServiceSid,
-                    to: `${req.user.phone}`
-                })
-                .done();
-            client.messages
-                .create({
-                    body: `Nuevo compra de ${req.user.name} => email ${req.user.email}`,
-                    from: 'whatsapp:+14155238886',
-                    to: 'whatsapp:+5493456620180'
-                })
-                .done();
-            ejs.renderFile('src/views/productList.ejs', { products }, (err, str) => {
-                message = {
-                    from: "Servidor de node",
-                    to: adminEmail,
-                    subject: `Nuevo compra de ${req.user.name} => de ${req.user.email}`,
-                    html: str
-                }
-            });
+            products.total = products.map((item) => +item.precio).reduce(((acc, value) => { return acc + value }), 0);
+            sendSmsBuyConfirmation(req, id, products.total)
+            sendWspBuyConfirmation(req)
+            await sendBuyConfirmationEmail(products, req);
             res.send({ result: 'OK' })
         } else {
             throw new Error('Id not defined')

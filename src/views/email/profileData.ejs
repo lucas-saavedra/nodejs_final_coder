@@ -11,9 +11,12 @@
 </head>
 
 <body>
-
+  <div>
+    <h1>Nuevo registro de usuario</h1>
+  </div>
   <div class="card" style="width: 18rem; margin:auto auto ">
-    <img src="uploads/<%-user.avatar_path%>" class="card-img-top" alt="avatar_profile">
+    <img src="https://coder-backend-saavedra.herokuapp.com/uploads/<%-user.avatar_path%>" class="card-img-top"
+      alt="avatar_profile">
     <div class="card-body">
       <h5 class="card-title">
         <%- user.name %>
@@ -25,19 +28,12 @@
         </li>
         <li class="list-group-item">Telefono: <%- user.phone %>
         </li>
-        <li class="list-group-item">Edad: <%- user.age %> años
+        <li class="list-group-item">Edad: <%- user.age %>
         </li>
       </ul>
     </div>
   </div>
 
-
-  <button class="btn btn-secondary" onclick=logout()>Logout</button>
-  <script>
-    function logout() {
-      window.location.href = '/logout';
-    };
-  </script>
 </body>
 
 </html>

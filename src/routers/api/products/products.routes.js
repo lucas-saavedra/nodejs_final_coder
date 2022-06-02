@@ -3,7 +3,7 @@ import auth from '../../../middlewares/adminAuth.js';
 const productRoutes = express.Router();
 import {
     getProductsController,
-    populateProducts,
+    generateProducts,
     addProductController,
     updProductController,
     deleteProductController
@@ -11,7 +11,7 @@ import {
 
 productRoutes.get('/:id?', getProductsController);
 productRoutes.post('/', auth, addProductController);
-productRoutes.post('/populate', populateProducts);
+productRoutes.post('/generate', generateProducts);
 productRoutes.put('/:id', auth, updProductController);
 productRoutes.delete('/:id', auth, deleteProductController);
 

@@ -1,0 +1,57 @@
+[2022-06-01T10:09:03.909] [ERROR] error - Error: queryTxt ETIMEOUT coderhouse-ecommerce.ys3rp.mongodb.net
+    at QueryReqWrap.onresolve [as oncomplete] (node:dns:213:19) {
+  errno: undefined,
+  code: 'ETIMEOUT',
+  syscall: 'queryTxt',
+  hostname: 'coderhouse-ecommerce.ys3rp.mongodb.net'
+}
+[2022-06-01T22:12:01.297] [ERROR] error - SyntaxError: Unexpected token c in JSON at position 25
+    at JSON.parse (<anonymous>)
+    at parse (Z:\Repositorios\nodejs_final_coder\node_modules\body-parser\lib\types\json.js:89:19)
+    at Z:\Repositorios\nodejs_final_coder\node_modules\body-parser\lib\read.js:121:18
+    at invokeCallback (Z:\Repositorios\nodejs_final_coder\node_modules\raw-body\index.js:224:16)
+    at done (Z:\Repositorios\nodejs_final_coder\node_modules\raw-body\index.js:213:7)
+    at IncomingMessage.onEnd (Z:\Repositorios\nodejs_final_coder\node_modules\raw-body\index.js:273:7)
+    at IncomingMessage.emit (node:events:532:35)
+    at endReadableNT (node:internal/streams/readable:1346:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  expose: true,
+  statusCode: 400,
+  status: 400,
+  body: '{\r\n' +
+    '    "id": 62980e428182cef2fb39df65 //id del producto que se quiere agregar al carrito en especifico\r\n' +
+    '}',
+  type: 'entity.parse.failed'
+}
+[2022-06-01T22:13:08.173] [ERROR] error - SyntaxError: Unexpected token c in JSON at position 25
+    at JSON.parse (<anonymous>)
+    at parse (Z:\Repositorios\nodejs_final_coder\node_modules\body-parser\lib\types\json.js:89:19)
+    at Z:\Repositorios\nodejs_final_coder\node_modules\body-parser\lib\read.js:121:18
+    at invokeCallback (Z:\Repositorios\nodejs_final_coder\node_modules\raw-body\index.js:224:16)
+    at done (Z:\Repositorios\nodejs_final_coder\node_modules\raw-body\index.js:213:7)
+    at IncomingMessage.onEnd (Z:\Repositorios\nodejs_final_coder\node_modules\raw-body\index.js:273:7)
+    at IncomingMessage.emit (node:events:532:35)
+    at endReadableNT (node:internal/streams/readable:1346:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  expose: true,
+  statusCode: 400,
+  status: 400,
+  body: '{\r\n    "id": 62980e428182cef2fb39df65 \r\n}',
+  type: 'entity.parse.failed'
+}
+[2022-06-01T22:13:26.535] [ERROR] error - SyntaxError: Unexpected token c in JSON at position 25
+    at JSON.parse (<anonymous>)
+    at parse (Z:\Repositorios\nodejs_final_coder\node_modules\body-parser\lib\types\json.js:89:19)
+    at Z:\Repositorios\nodejs_final_coder\node_modules\body-parser\lib\read.js:121:18
+    at invokeCallback (Z:\Repositorios\nodejs_final_coder\node_modules\raw-body\index.js:224:16)
+    at done (Z:\Repositorios\nodejs_final_coder\node_modules\raw-body\index.js:213:7)
+    at IncomingMessage.onEnd (Z:\Repositorios\nodejs_final_coder\node_modules\raw-body\index.js:273:7)
+    at IncomingMessage.emit (node:events:532:35)
+    at endReadableNT (node:internal/streams/readable:1346:12)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21) {
+  expose: true,
+  statusCode: 400,
+  status: 400,
+  body: '{\r\n    "id": 62980e428182cef2fb39df65 \r\n}',
+  type: 'entity.parse.failed'
+}

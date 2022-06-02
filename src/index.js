@@ -12,10 +12,9 @@ import os from 'os';
 import { consoleLogs, errorLogs } from './middlewares/loggers.js';
 import { consoleLogger, errorFileLogger } from './logger/index.js';
 
-const clusterMode = config.MODE === 'cluster';
+const clusterMode = false;
 if (clusterMode && cluster.isPrimary) {
   const CORE_NUMBERS = os.cpus().length;
-  
   consoleLogger.info('Numero de procesadores => ', CORE_NUMBERS);
   consoleLogger.info('PID Proceso primario=> ', process.pid);
 
