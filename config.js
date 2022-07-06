@@ -3,10 +3,13 @@ import yargs from 'yargs'
 dotenv.config();
 const args = yargs(process.argv.slice(2))
   .alias({
-    m: 'mode'
+    p: 'port',
+    m: 'mode',
+    pers: 'persistencia'
   })
   .default({
-    mode: "fork"
+    port: 8080,
+    persistencia: 'mongo'
   })
   .argv;
 
@@ -16,11 +19,8 @@ const {
 
 } = process.env;
 
-const PORT = process.env.PORT || 8080;
+const PORT = args.port || 8080;
 
-const {
-  mode
-} = args;
 const twilio_cfg = {
   accountSid: process.env.ACCOUNT_SID,
   authToken: process.env.AUTH_TOKEN,
@@ -30,10 +30,12 @@ const twilio_cfg = {
 const GMAIL = {
   pass: process.env.GMAIL_PASS
 }
-
+const {
+  mode,
+  persistencia
+} = args;
 export default {
-  GMAIL,
-  twilio_cfg,
+  persistencia,
   PORT: PORT,
   MODE: mode,
   DB_PASSWORD,
