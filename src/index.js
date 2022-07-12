@@ -1,12 +1,11 @@
-import express from 'express';
-import config from '../config.js';
-
+import app from './app.js'
+import config from './utils/config.js';
+import { infoLog } from './utils/loggers.js';
 
 const PORT = config.PORT;
 
-const app = express();
 
 app.listen(PORT, () => {
-    console.log(`Listening ... => ${PORT}`);
+  infoLog.info(`Listening ... => ${PORT}`);
 })
 
