@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra realizada</title>
+
+</head>
+<!-- <link rel="stylesheet" href="./css/bootstrap.css"> -->
+
+<body>
+    <style>
+        .img {
+            height: 6rem;
+            width: 7rem;
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <div class="container">
+        <div class="row bg-light card">
+            <div class="col">
+                <div class="py-3">
+                    <h1 class="text-center h2 display-6">Orden Nº #<%= order.orderNumber %>
+                    </h1>
+                </div>
+                <div>
+                    <h4>Datos del cliente</h4>
+                    <p>Nombre: <%= order.name %>
+                    </p>
+                    <p>Email: <%= order.email %>
+                    </p>
+                    <p>Direccion: <%= order.adress %>
+                    </p>
+                    <p>Telefono: <%= order.phone %>
+                    </p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <h4>
+                        Generada el : <%= order.createdAt %>
+                    </h4>
+
+                    <h4> Estado: <span class="badge bg-success">
+                            <%= order.state %>
+                        </span></h4>
+
+
+                </div>
+                <% if (order.items.length) { %>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Dealle</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Subtotal</th>
+                                <th scope="col">Imagen</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% order.items.forEach(item=> { %>
+                                <tr>
+                                    <td class="align-middle">
+                                        <%= item.name %>
+                                    </td>
+
+                                    <td class="align-middle">
+                                        <%= item.details %>
+                                    </td>
+                                    <td class="align-middle">
+                                        $ <%= item.price %>
+                                    </td>
+                                    <td class="align-middle">
+                                        <%= item.quantity %>
+                                    </td>
+                                    <td class="align-middle">
+                                        $<%= item.total %>
+                                    </td>
+                                    <td class="align-middle img">
+                                        <img src="<%= item.url %>" alt="<%= item.name%>" />
+                                    </td>
+                                </tr>
+                                <%}); %>
+                        </tbody>
+                    </table>
+                    <h3>Total: $<%= order.subTotal %>
+                    </h3>
+
+            </div>
+
+            <% }else{ %>
+                <div class="alert alert-primary" role="alert">
+                    <p>No se encontraron productos.</p>
+                </div>
+                <% }%>
+
+        </div>
+
+    </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment-with-locales.min.js"
+        integrity="sha512-42PE0rd+wZ2hNXftlM78BSehIGzezNeQuzihiBCvUEB3CVxHvsShF86wBWwQORNxNINlBPuq7rG4WWhNiTVHFg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>

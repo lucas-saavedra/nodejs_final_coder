@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+</head>
+
+<body>
+  <div>
+    <h1>Nuevo registro de usuario</h1>
+  </div>
+  <div class="card" style="width: 18rem; margin:auto auto ">
+    <div class="card-body">
+      <h2 class="card-title">
+        <%- user.name %>
+      </h2>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Email: <%- user.email %>
+        </li>
+        <li class="list-group-item">Direccion: <%- user.adress %>
+        </li>
+        <li class="list-group-item">Telefono: <%- user.phone %>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+
+</html>
