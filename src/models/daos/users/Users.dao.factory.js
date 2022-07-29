@@ -1,10 +1,10 @@
-import config from "../../../../env.config.js";
+import configs from "../../../../env.config.js";
 import usersSchema from "../../schemas/users.schema.js";
 
 import UsersDaoDb from "./Users.Dao.Db.js";
 
 let dao;
-switch (config.users_persistence) {
+switch (configs.PERSISTENCE.users_persistence) {
     case 'mongo':
         dao = new UsersDaoDb('users', usersSchema);
         break;

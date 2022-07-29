@@ -9,5 +9,16 @@ html(lang='es')
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous")
         title PUG Backend
     body
-        div(class="container p-3 mb-2 bg-light text-dark py-3")
-            block view
+    div(class="container p-3 mb-2 bg-light text-dark py-3")
+        h1 Configuración
+        ul
+            li= `Modo: ${configs.NODE_ENV === 'development' ? '[ Desarrollo ]': '[=Producción=]'}`
+            li= 'Duracion de la cookie: '+ configs.COOKIE_MAX_AGE
+            li= 'Nombre de la base de datos : '+ configs.DATABASE 
+            li= 'URL de la Base de datos : '+ configs.MONGO_URI 
+            li= 'Puerto: '+ configs.PORT
+            li= 'Secreto: '+ configs.SECRET
+            li= 'Persistencia de las ordenes: '+ configs.PERSISTENCE.orders_persistence
+            li= 'Persistencia de los productos: '+ configs.PERSISTENCE.products_persistence
+            li= 'Persistencia de los usuarios: '+ configs.PERSISTENCE.users_persistence
+            li= 'Persistencia de los carritos: '+ configs.PERSISTENCE.carts_persistence

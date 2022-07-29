@@ -13,6 +13,7 @@ const MESSAGES = {
   BAD_REQUEST: "[BAD_REQUEST] => Check the paramteters you sent",
   CART_NOT_FOUND: "[NOT_FOUND] => The Cart does not exist!",
   PRODUCT_NOT_FOUND: "[NOT_FOUND] => The Product does not exist!",
-  UNAUTHORIZE: "[UNAUTHORIZE ACCES] The access to this route is private "
+  UNAUTHORIZE: "[UNAUTHORIZE ACCES] The access to this route is private",
+  UNAUTHORIZE_TOKEN: "[UNAUTHORIZE TOKEN] The access to this route is private"
 }
 export { STATUS, MESSAGES };

@@ -8,8 +8,8 @@
   },
   "type": "module",
   "scripts": {
-    "start": "node index.js -m prod",
-    "dev": " nodemon index.js -m dev"
+    "start": "node index.js",
+    "dev": " nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.6.0",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
     "express": "^4.18.1",

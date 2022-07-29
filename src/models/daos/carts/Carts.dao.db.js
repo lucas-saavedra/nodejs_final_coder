@@ -17,5 +17,9 @@ class CartsDaoMongoDb extends MongoDaoDb {
 
         return pupulated;
     };
+    clearCart = async (userId) => {
+        const userCart = await this.model.findOne({ userId });
+        return userCart
+    }
 }
 export default CartsDaoMongoDb;

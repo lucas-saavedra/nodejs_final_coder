@@ -1,14 +1,16 @@
 import MongoClient from "../../../db/mongo/DBClientMongo.js";
-import { MESSAGES, STATUS } from "../../../utils/constants/api.constants.js";
-import CustomError from "../../../utils/errors/CustomError.js";
+import { MESSAGES, STATUS } from "../../../utils/constants.utils.js";
+import CustomError from "../../../utils/customError.utils.js";
 
 class MongoDaoDb {
     constructor(collection, schema) {
+
         this.client = new MongoClient();
         (async () => {
             this.connection = await this.client.connect();
             this.model = this.connection.model(collection, schema);
         })();
+
     }
     async getAll(filter = {}) {
         const documents = await this.model.find(filter, { __v: 0 }).lean();

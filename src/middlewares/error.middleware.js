@@ -12,6 +12,7 @@ const errorMiddleware = (error, req, res, next) => {
     error_details: errorItem
   };
   return res.status(status).json(errorResponse);
+
 };
 
 export default errorMiddleware;

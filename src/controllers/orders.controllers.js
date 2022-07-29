@@ -1,7 +1,7 @@
 import CartsApi from "../api/carts.api.js";
 import OrdersApi from "../api/orders.api.js";
 import { sendOrderConfirmationEmail } from "../services/nodemailer.js";
-import CustomError from "../utils/errors/CustomError.js";
+import CustomError from "../utils/customError.utils.js";
 
 
 class OrdersController {

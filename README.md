@@ -8,12 +8,12 @@ User story/brief:
 
 - Contendrá las rutas necesarias que permitan listar los productos existentes, ingresar productos nuevos, borrar y modificar sus detalles, así como interactuar con el carrito de compras.
 - Se implementará una API RESTful con los verbos get, post, put y delete para cumplir con todas las acciones necesarias.
-- Debe brindar al frontend un mecanismo de ingreso autorizado al sistema basado en JWT (Json Web Token).
-- Los productos ingresados se almacenarán en una base de datos MongoDB.
-- El usuario podrá registrar sus credenciales de acceso (email y password) para luego poder ingresar a su cuenta. Estas credenciales serán guardadas en la base de datos MongoDB encriptando la contraseña.
-- El cliente tendrá una sesión activa de usuario con tiempo de expiración configurable.
+- [x] Debe brindar al frontend un mecanismo de ingreso autorizado al sistema basado en JWT (Json Web Token).
+- [x] Los productos ingresados se almacenarán en una base de datos MongoDB.
+- [x] El usuario podrá registrar sus credenciales de acceso (email y password) para luego poder ingresar a su cuenta. Estas credenciales serán guardadas en la base de datos MongoDB encriptando la contraseña.
+- [x] El cliente tendrá una sesión activa de usuario con tiempo de expiración configurable.
 - Implementarás un canal de chat basado en websockets, el cual permita atender las consultas del cliente.
-- La arquitectura del servidor estará basada en capas (MVC)
+- [x] La arquitectura del servidor estará basada en capas (MVC)
 - El servidor podrá tomar configuraciones desde un archivo externo.
 - Dispondrá de una vista creada con pug, que permita ver la configuración del servidor.
 - Se enviará un mail a una casilla configurable, por cada registro nuevo de usuario y con cada orden de compra generada.
@@ -27,7 +27,7 @@ Requisitos base
 - [x]  El menú de registro consta del nombre completo del cliente, número telefónico, email y campo de password duplicado para verificar coincidencia.
 - [x]  Si un usuario se loguea exitosamente o está en sesión activa, la ruta &#39;/&#39; hará una re dirección a la ruta del carrito **/productos**
 - [x]  La ruta **/productos** devolverá el listado de todos los productos disponiblespara la compra.
-- [x] La ruta **/productos/:categoria** devolverá los productos por la categoría requerida.
+- [x] La ruta **/productos/?categoria={categoria}** devolverá los productos por la categoría requerida.
 - [x]  Los ítems podrán ser agregados al carrito de compras y listados a través de la ruta **/carrito**.
 - [x] Se podrán modificar y borrar por su id a través de la ruta **/carrito:id**.
 
@@ -43,7 +43,7 @@ Requisitos base
       - Descripción
       - Categoría
 
-    - [] **mensajes:** chat del usuario (preguntas y respuestas)
+    - [ ] **mensajes:** chat del usuario (preguntas y respuestas)
       - Email: del usuario que pregunta o al que se responde
       - Tipo (&#39;usuario&#39; para preguntas ó &#39;sistema&#39; para respuestas)
       - Fecha y hora
@@ -62,5 +62,5 @@ Requisitos base
       - Email de quién realizó la orden
   
 - [x] Finalizada la orden, enviar un mail a la dirección de mi cuenta con los detalles de la orden.
-- [] Se dispondrá de un archivo de configuración externo con opciones para desarrollo y otras para producción, que serán visualizadas a través de una vista construida con handlebars. Como parámetros de configuración estará el puerto de escucha del servidor, la url de la base de datos, el mail que recibirá notificaciones del backend, tiempo de expiración de sesión y los que sea necesario incluir.
-- [] Vamos a contar con un canal de chat general donde el usuario enviará los mensajes en la ruta **/chat** y en **/chat/:email** podrá ver sólo los suyos. Se utilizará la colección **mensajes** en MongoDB. La tecnología de comunicación a utilizar será Websockets. El servidor implementará una vista, utilizando handlebars, para visualizar todos los mensajes y poder responder individualmente a ellos, eligiendo el email de respuesta.
+- [x] Se dispondrá de un archivo de configuración externo con opciones para desarrollo y otras para producción, que serán visualizadas a través de una vista construida con handlebars. Como parámetros de configuración estará el puerto de escucha del servidor, la url de la base de datos, el mail que recibirá notificaciones del backend, tiempo de expiración de sesión y los que sea necesario incluir.
+- [ ] Vamos a contar con un canal de chat general donde el usuario enviará los mensajes en la ruta **/chat** y en **/chat/:email** podrá ver sólo los suyos. Se utilizará la colección **mensajes** en MongoDB. La tecnología de comunicación a utilizar será Websockets. El servidor implementará una vista, utilizando handlebars, para visualizar todos los mensajes y poder responder individualmente a ellos, eligiendo el email de respuesta.

@@ -10,9 +10,10 @@ class CartRoutes {
     }
 
     initialize(prefix = "") {
-        router.get(`${prefix}/`, this.controller.getCarForSession);
+        router.get(`${prefix}/`, this.controller.getCartController);
         router.post(`${prefix}/clear`, this.controller.clearCart);
         router.post(`${prefix}/`, this.controller.addNewProductToCartController);
+        router.put(`${prefix}/`, this.controller.substractProductToCartController);
         router.delete(`${prefix}/:productId`, this.controller.delProductFromCartController);
         return router;
     }

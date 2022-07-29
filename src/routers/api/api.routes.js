@@ -1,8 +1,8 @@
 import express from "express";
-import authRoutes from "./authRoutes/auth.routes.js";
+import authRoutes from "./auth/auth.routes.js";
 import productRoutes from "./products/products.routes.js";
 import cartsRoutes from "./cart/carts.routes.js";
-import isAuth from "../../middlewares/isAuth.js";
+import isAuth from "../../middlewares/isAuth.middleware.js";
 import orderRoutes from "./orders/orders.routes.js";
 
 const router = express.Router();

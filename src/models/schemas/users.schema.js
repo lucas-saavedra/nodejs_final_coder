@@ -15,10 +15,8 @@ const usersSchema = new mongoose.Schema({
     passwordHash: { type: String, required: true },
     adress: { type: String, },
     phone: { type: String, required: true },
-    timestamp: {
-        type: Date, min: Date.now()
-    },
-})
+
+}, { timestamps: true })
 usersSchema.set('toJSON', {
     transform: (document, returnedObject) => {
         returnedObject.id = returnedObject._id.toString()

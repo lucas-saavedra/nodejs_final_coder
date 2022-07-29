@@ -1,4 +1,4 @@
-import CustomError from "../utils/errors/CustomError.js"
+import CustomError from "../utils/customError.utils.js"
 class DbClient {
     async connect() {
         throw new CustomError(500, "falta implementar 'connect' en subclase!")

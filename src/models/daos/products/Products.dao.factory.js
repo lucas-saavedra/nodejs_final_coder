@@ -4,7 +4,7 @@ import ProductsDaoDb from "./ProductsDaoDb.js";
 import ProductsDaoMem from "./ProductsDaoMem.js";
 
 let dao;
-switch (config.products_persistence) {
+switch (config.PERSISTENCE.products_persistence) {
     case 'mem':
         dao = new ProductsDaoMem();
         break;

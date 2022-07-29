@@ -1,5 +1,4 @@
 import ProductsApi from "../api/products.api.js";
-import { MESSAGES, STATUS } from "../utils/constants/api.constants.js";
 
 class ProductController {
     constructor() {
@@ -10,7 +9,7 @@ class ProductController {
             let result = req.query.categoria ?
                 await this.productApi.getAllApi(
                     {
-                        categoria: req.query.categoria
+                        category: req.query.categoria
                     }
                 )
                 :

@@ -3,26 +3,27 @@ import passportLocal from 'passport-local';
 import bcrypt from 'bcrypt';
 import passport_jwt from 'passport-jwt';
 import UsersApi from "../api/users.api.js";
+import CustomError from "../utils/customError.utils.js";
 import config from "../../env.config.js";
-import jwtCookieExtractor from "../utils/jwtCookieExtractor.js";
-import { sendConfirmationEmail } from "../services/nodemailer.js";
-import CustomError from "../utils/errors/CustomError.js";
-
+import { MESSAGES, STATUS } from "../utils/constants.utils.js";
 
 const localStrategy = passportLocal.Strategy;
-const userApi = new UsersApi();
-
 const JWTstrategy = passport_jwt.Strategy;
+const ExtractJwt = passport_jwt.ExtractJwt;
 
+const userApi = new UsersApi();
 passport.use(
     new JWTstrategy(
         {
             secretOrKey: config.SECRET,
-            jwtFromRequest: jwtCookieExtractor
+            jwtFromRequest: ExtractJwt.fromHeader('auth_token')
         },
-
         async (token, done) => {
             try {
+                if (!token.user) {
+                    const error = new CustomError(STATUS.UNAUTHORIZE, MESSAGES.UNAUTHORIZE_TOKEN)
+                    return done(error);
+                }
                 return done(null, token.user);
             } catch (error) {
                 done(error);
@@ -53,8 +54,7 @@ passport.use(
                     name: req.body.name,
                     email,
                     passwordHash,
-                    adress: req.body.adress,
-                    timestamp: Date.now(),
+                    adress: req.body.adress
                 }
                 const user = await userApi.createUserApi({ ...newUser });
                 return done(null, user);

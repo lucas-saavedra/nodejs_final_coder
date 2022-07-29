@@ -1,5 +1,5 @@
-import { MESSAGES, STATUS } from "../utils/constants/api.constants.js";
-import CustomError from "../utils/errors/CustomError.js";
+import { MESSAGES, STATUS } from "../utils/constants.utils.js";
+import CustomError from "../utils/customError.utils.js";
 
 const isAuth = async (req, res, next) => {
 

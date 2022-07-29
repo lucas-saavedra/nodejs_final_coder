@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import ProductController from '../../../controllers/products.controller.js';
-import userExtractor from '../../../middlewares/userExtractor.js';
+
 
 const router = Router();
 

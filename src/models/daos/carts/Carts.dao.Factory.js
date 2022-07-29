@@ -3,7 +3,7 @@ import cartsSchema from "../../schemas/cart.schemas.js";
 import CartsDaoMongoDb from "./Carts.dao.db.js";
 
 let dao;
-switch (config.orders_persistence) {
+switch (config.PERSISTENCE.carts_persistence) {
     case 'mem':
         // -> Falta implementar
         break;
