@@ -8,14 +8,13 @@ let userEmail;
 let userName;
 socket.on('connect', () => {
 
-
   socket.emit('whoami', (user) => {
     userEmail = user.email;
     userName = user.name;
   })
 
   socket.on('server:messages', (messages) => {
-    fetch('http://localhost:8080/templates/chatList.ejs')
+    fetch('https://coder-backend-saavedra.herokuapp.com/templates/chatList.ejs')
       .then(response => response.text())
       .then(data => {
         let html;
