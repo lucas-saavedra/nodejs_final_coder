@@ -18,10 +18,7 @@ class ProductsRepo {
         const newProduct = await this.productsDao.add(element);
         return newProduct;
     }
-    async populateRepo() {
-        const products = await this.productsDao.populate();
-        return products;
-    }
+    
     async updateByIdRepo(id, updatedElement) {
         const updatedProduct = await this.productsDao.updateById(id, updatedElement);
         return updatedProduct;

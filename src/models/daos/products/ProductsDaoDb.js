@@ -1,5 +1,5 @@
-
-import { faker } from '@faker-js/faker';
+/* 
+import { faker } from '@faker-js/faker'; */
 import MongoDaoDb from "../mongodb/Mongo.dao.js";
 
 class ProductsDaoDb extends MongoDaoDb {
@@ -8,7 +8,7 @@ class ProductsDaoDb extends MongoDaoDb {
         super(collection, schema);
     }
 
-    populate = async () => {
+    /* populate = async () => {
         let products = [];
         for (let index = 0; index < 10; index++) {
             const mockProduct = {
@@ -24,6 +24,6 @@ class ProductsDaoDb extends MongoDaoDb {
         }
         const result = this.model.insertMany(products);
         return result;
-    }
+    } */
 }
 export default ProductsDaoDb;
