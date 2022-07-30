@@ -1,0 +1,35 @@
+<div class="py-3">
+  <h1 class="text-center h2">Productos</h1>
+</div>
+<% if (products.length) { %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Price</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% products.forEach(p=> { %>
+        <tr>
+          <td class="align-middle">
+            <%= p.title %>
+          </td>
+          <td class="align-middle">
+            $<%= p.price %>
+          </td>
+          <td class="align-middle">
+            <img style="height:2.5rem;" src="<%= p.thumbnail %>" alt="<%= p.title%>" />
+          </td>
+        </tr>
+        <%}); %>
+    </tbody>
+  </table>
+  
+  <% }else{ %>
+    <div class="alert alert-primary" role="alert">
+      <p>No se encontraron productos.</p>
+    
+    </div>
+    <% }%>

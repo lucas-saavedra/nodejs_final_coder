@@ -9,12 +9,14 @@ const args = yargs(process.argv.slice(2))
     users_pers: 'users_persistence',
     orders_pers: 'orders_persistence',
     carts_pers: 'carts_persistence',
+    msg_pers: 'messages_persistence',
   })
   .default({
     products_persistence: 'mongo',
     users_persistence: 'mongo',
     orders_persistence: 'mongo',
     carts_persistence: 'mongo',
+    messages_persistence: 'mongo',
   })
   .argv;
 
@@ -49,7 +51,8 @@ const {
   products_persistence,
   users_persistence,
   orders_persistence,
-  carts_persistence
+  carts_persistence,
+  messages_persistence
 } = args;
 
 const PERSISTENCE = {
@@ -57,6 +60,7 @@ const PERSISTENCE = {
   orders_persistence,
   products_persistence,
   users_persistence,
+  messages_persistence
 }
 
 export default {

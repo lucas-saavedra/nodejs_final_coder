@@ -11,6 +11,7 @@ const usersSchema = new mongoose.Schema({
             "Invalid email",
         ],
     },
+    admin: { type: Boolean, default: false },
     name: { type: String, required: true },
     passwordHash: { type: String, required: true },
     adress: { type: String, },

@@ -9,7 +9,6 @@ class ProductsApi {
         const products = await this.productsRepo.getAllRepo(filter);
         return products;
     }
-
     async getByIdApi(id) {
         const product = this.productsRepo.getByIdRepo(id);
         return product;

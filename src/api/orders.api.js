@@ -6,7 +6,7 @@ class OrdersApi {
     }
 
     addApi = async (order) => {
-        const result = this.ordersDao.add(order);
+        const result = await this.ordersDao.add(order);
         return result;
     }
 }

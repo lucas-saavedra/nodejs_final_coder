@@ -12,9 +12,10 @@ import passport from './auth/auth.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 import envConfig from './../env.config.js';
 import router from './routers/app.routes.js';
+import CartsApi from './api/carts.api.js';
+import isAuth from './middlewares/isAuth.middleware.js';
 
-
-const app = express();
+export const app = express();
 app.use(cors())
 app.use(morgan(envConfig.NODE_ENV == 'development' ? 'dev' : 'tiny'));
 app.use(express.json());
@@ -26,8 +27,7 @@ app.use(express.static(path.resolve("./public")));
 //Middlewares
 app.use(cookieParser());
 
-
-app.use(session({
+export const sessionMiddleware = session({
   name: 'my-session',
   secret: envConfig.SECRET,
   resave: false,
@@ -39,7 +39,8 @@ app.use(session({
   store: MongoStore.create({
     mongoUrl: getMongoDbUri(envConfig.DATABASE)
   })
-}));
+})
+app.use(sessionMiddleware);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -47,9 +48,8 @@ app.use(passport.session());
 app.use(express.static('public'));
 // Template engines
 app.set('views', path.resolve('./src/views'));
-  app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 app.get('/serverconfigs', async (req, res, next) => {
-
   res.render('pug/layouts/home', { configs: envConfig })
 })
 
@@ -62,12 +62,15 @@ app.get('/', async (req, res) => {
     return res.sendFile(path.resolve("./public", "login.html"));
   }
 })
+app.get('/chat/:email?', isAuth, async (req, res) => {
+  return res.sendFile(path.resolve("./public", "chat.html"));
+})
+
 
 app.get('/register', async (req, res) => {
   return res.sendFile(path.resolve("./public", "register.html"));
 })
+
 app.use('/api', router);
 app.use(errorMiddleware);
 
-
-export default app;

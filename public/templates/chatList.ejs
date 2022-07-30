@@ -1,0 +1,35 @@
+<% if (messages.length) { %>
+    <% messages.forEach(e=> { %>
+        <div class="<% if (e.socketId===socketId) { %>d-flex flex-row-reverse<% }%>">
+            <div
+                class=" p-2 text-dark bg-opacity-25 m-1 rounded col-11 <% if (e.socketId===socketId)  { %> bg-success text-end<% }else{%> bg-secondary <% } %> > ">
+                <div class="py-1">
+                    <span class="card-text  fw-bold">
+                        <%= e.name %>
+                    </span>
+                    <span class="card-text">
+                        <a href="chat/?email=<%= e.email %>" target="_blank" rel="noopener noreferrer">
+                            <%= e.email %>
+                        </a>
+                    </span>
+
+                    <span class="card-text"><small class="text-muted">
+                            <%= e.createdAt %>
+                        </small></span>
+                </div>
+                <p>
+                    <%= e.body %>
+                </p>
+                <p>
+                    <% if(e.type==='user' ) { %> Pregunta <% }else{%>Respuesta <% } %>
+                </p>
+            </div>
+        </div>
+        <% }) %>
+            <% }else{ %>
+                <div class="col-md-12">
+                    <div class="alert alert-primary" role="alert">
+                        <p>No se encontraron mensajes.</p>
+                    </div>
+                </div>
+                <% }%>

@@ -1,4 +1,4 @@
-import CartsRepo from "../repositories/cart.repo.js";
+import CartsRepo from "../repositories/Cart.repo.js";
 
 class CartsApi {
     constructor() {

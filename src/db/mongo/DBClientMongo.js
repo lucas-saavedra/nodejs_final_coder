@@ -4,15 +4,18 @@ import CustomError from "../../utils/customError.utils.js";
 import getMongoDbUri from "./getMongoDbUri.js";
 import DbClient from "../DBClient.js"
 import { infoLog } from "../../utils/loggers.utils.js";
-
+let instance;
 class MongoClient extends DbClient {
     constructor() {
         super();
         this.client = mongoose;
+        this.connected = false;
     }
     async connect() {
         try {
-            const instance = await this.client.connect(getMongoDbUri(envConfig.DATABASE));
+            if (!instance) {
+                instance = await this.client.connect(getMongoDbUri(envConfig.DATABASE));
+            }
             return instance;
         } catch (error) {
             throw new CustomError(500, 'Error al conectarse de mongodb', error)
