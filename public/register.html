@@ -92,10 +92,10 @@
         axios.post('api/auth/register', formPayload)
           .then(function (response) {
             form.reset();
-            window.location.href = 'api/productos';
+            window.location.href = '/api/productos'
           })
           .catch(function (error) {
-            console.log(JSON.parse(error.response));
+            window.location.href = '/register-error'
           });
       }
     })

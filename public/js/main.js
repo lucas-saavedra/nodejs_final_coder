@@ -11,6 +11,7 @@ socket.on('connect', () => {
   socket.emit('whoami', (user) => {
     userEmail = user.email;
     userName = user.name;
+    isAdmin = user.admin;
   })
 
   socket.on('server:messages', (messages) => {
@@ -36,10 +37,10 @@ messageForm.addEventListener('submit', (e) => {
   console.log();
   socket.emit('client:newMessage', {
     socketId: socket.id,
-    email: userEmail,
+    email: paramEmail ? paramEmail : userEmail,
     name: userName,
     body: document.getElementById('message').value,
-    type: document.getElementById('userType').value
+    type: paramEmail ? 'system' : 'user'
   })
 })
 
