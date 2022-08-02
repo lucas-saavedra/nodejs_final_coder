@@ -12,7 +12,7 @@ html(lang='es')
     div(class="container p-3 mb-2 bg-light text-dark py-3")
         h1 Configuración
         ul
-            li= `Modo: ${configs.NODE_ENV === 'development' ? '[ Desarrollo ]': '[=Producción=]'}`
+            li= `Modo: ${configs.NODE_ENV === 'development' ? '[ Desarrollo ]': '[ Producción ]'}`
             li= 'Duracion de la cookie: '+ configs.COOKIE_MAX_AGE
             li= 'Nombre de la base de datos : '+ configs.DATABASE 
             li= 'URL de la Base de datos : '+ configs.MONGO_URI 
