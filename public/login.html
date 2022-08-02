@@ -11,26 +11,47 @@
 </head>
 
 <body>
+  <div class="container bg-light py-3">
+    <div class="row">
+      <div class="col-6 mx-auto">
+        <form action="/api/auth/login" method="post">
+          <div>
+            <h3 class="text-center py-3">Login</h3>
+          </div>
+          <div class="mb-4 col-10 mx-auto">
+            <label for="name" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="mb-4 col-10 mx-auto">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <div class="d-flex justify-content-center pb-3">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+          <div class="mx-auto text-end py-3">
+            Does not have an account? Register <a href="/register">here</a>
+          </div>
+        </form>
+        <div class="card">
+          <div class="card-header">
+            Admin account
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Email</h5>
+            <p class="card-text">admin@admin.com</p>
+            <hr>
+            <h5 class="card-title">Password</h5>
+            <p class="card-text">root</p>
+            <hr>
+          </div>
+        </div>
+      </div>
 
-  <form action="/api/auth/login" method="post" class="bg-light py-3  col-6 container">
-    <div>
-      <h3 class="text-center py-3">Login</h3>
     </div>
-    <div class="mb-4 col-10 mx-auto">
-      <label for="name" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" name="email" required>
-    </div>
-    <div class="mb-4 col-10 mx-auto">
-      <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" name="password" required>
-    </div>
-    <div class="d-flex justify-content-center pb-3">
-      <button type="submit" class="btn btn-primary">Enviar</button>
-    </div>
-    <div class="mx-auto text-end py-3">
-      Does not have an account? Register <a href="/register">here</a>
-    </div>
-  </form>
+
+  </div>
+
 
 
 </body>

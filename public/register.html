@@ -98,10 +98,10 @@
           phone: form.phone.value
         }
 
-        axios.post('api/auth/register', formPayload)
+        axios.post('auth/register', formPayload)
           .then(function (response) {
             form.reset();
-            window.location.href = '/api/productos'
+            window.location.href = '/productos'
           })
           .catch(function (error) {
             if (error.response.status === 409) {

@@ -15,7 +15,8 @@ socket.on('connect', () => {
   })
 
   socket.on('server:messages', (messages) => {
-    fetch('https://coder-backend-saavedra.herokuapp.com/templates/chatList.ejs')
+    const href = window.location.origin;
+    fetch(`${href}/templates/chatList.ejs`)
       .then(response => response.text())
       .then(data => {
         let html;
@@ -34,7 +35,6 @@ socket.on('connect', () => {
 const messageForm = document.querySelector("#messageForm");
 messageForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.log();
   socket.emit('client:newMessage', {
     socketId: socket.id,
     email: paramEmail ? paramEmail : userEmail,

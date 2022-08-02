@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 import yargs from 'yargs'
 import path from 'path'
 
-const ADMIN_EMAIL = 'lucas.saavedra.dev@gmail.com';
+
 const args = yargs(process.argv.slice(2))
   .alias({
     prods_pers: 'products_persistence',
@@ -39,7 +39,8 @@ const {
   SECRET,
   DATABASE,
   PORT,
-  MONGO_URI
+  MONGO_URI,
+  ADMIN_EMAIL
 } = process.env;
 
 

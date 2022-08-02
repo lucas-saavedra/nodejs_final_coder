@@ -3,9 +3,8 @@ import passportLocal from 'passport-local';
 import bcrypt from 'bcrypt';
 import passport_jwt from 'passport-jwt';
 import UsersApi from "../api/users.api.js";
-import CustomError from "../utils/customError.utils.js";
 import config from "../../env.config.js";
-import { MESSAGES, STATUS } from "../utils/constants.utils.js";
+
 
 const localStrategy = passportLocal.Strategy;
 const JWTstrategy = passport_jwt.Strategy;
@@ -21,7 +20,7 @@ passport.use(
         async (token, done) => {
             try {
                 if (!token.user) {
-                    const error = new CustomError(STATUS.UNAUTHORIZE, MESSAGES.UNAUTHORIZE_TOKEN)
+
                     return done(error);
                 }
                 return done(null, token.user);
@@ -44,8 +43,7 @@ passport.use(
             try {
                 const isUserRegistered = await userApi.getUserByUsernameApi(email);
                 if (isUserRegistered) {
-                    const error = new CustomError(STATUS.UNAUTHORIZE, MESSAGES.UNAUTHORIZE_TOKEN)
-                    return done(error);
+                    return done(null, false)
                 }
                 const saltRounds = 10;
                 const passwordHash = await bcrypt.hash(password, saltRounds);

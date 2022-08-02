@@ -10,7 +10,6 @@ class ProductRoutes {
     }
 
     initialize(prefix = "") {
-        router.get(`${prefix}/populate`, this.controller.populateProducts);
         router.get(`${prefix}/:id?`, this.controller.getProductsController);
         router.post(`${prefix}/`, this.controller.addProductController);
         router.put(`${prefix}/:id`, this.controller.updProductController);

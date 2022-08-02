@@ -34,9 +34,7 @@ authRoutes.post(
                             const token = jwt.sign({ user }, config.SECRET);
                             res
                                 .header('auth_token', token)
-                                .json({
-                                    data: { token }
-                                })
+                                .redirect('/productos')
                         }
                     )
                 } catch (error) {
