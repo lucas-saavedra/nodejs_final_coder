@@ -1,9 +1,17 @@
+import { MESSAGES, STATUS } from "../utils/constants.utils.js";
+import CustomError from "../utils/customError.utils.js";
 
-const errorMiddleware = (error, req, res, next) => {
+
+const errorResponder = (error, req, res, next) => {
+  
+  if (error.message.includes('Cast to ObjectId failed')) {
+    error = new CustomError(STATUS.NOT_FOUND, MESSAGES.PRODUCT_NOT_FOUND);
+  }
   const status = error.status || 500;
+  const message = error.message.split('=>');
   const errorItem = {
-    message: error.message,
-    details: error.details
+    message: message[0],
+    details: message[1]
   };
 
   const errorResponse = {
@@ -11,8 +19,13 @@ const errorMiddleware = (error, req, res, next) => {
     status,
     error_details: errorItem
   };
-  return res.status(status).json(errorResponse);
+  res.render('ejs/error.ejs', { error: errorResponse })
+  //return res.status(status).json(errorResponse);
 
 };
 
-export default errorMiddleware;
+/* errorPageRender = (error, req, res) => {
+  res.render('ejs/error.ejs', { error })
+} */
+
+export default errorResponder;
