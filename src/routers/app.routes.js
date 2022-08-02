@@ -7,6 +7,7 @@ import path from 'path';
 import apiRoutes from './api/api.routes.js';
 import isAuth from '../middlewares/isAuth.middleware.js';
 import isAdminAuth from '../middlewares/isAdminAuth.middleware.js';
+import envConfig from '../../env.config.js';
 
 const router = express.Router();
 
