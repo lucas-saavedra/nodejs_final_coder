@@ -19,6 +19,17 @@ User story/brief:
 - Se enviará un mail a una casilla configurable, por cada registro nuevo de usuario y con cada orden de compra generada.
 - En caso de detectar algún error, el servidor enviará una vista implementada con ejs, que contenga el id y el detalle completo
 
+## Rutas
+
+  | AUTH    | Metodo | Ruta                      | Descripción                                        | Body |
+  | ------- | ------ | ------------------------- | -------------------------------------------------- | ---- |
+  | Session | GET    | /productos                | Devuelve la lista de productos                     |      |
+  | Session | GET    | /productos/${producto_id} | Devuelve un producto con sus detalles por su ID    |      |
+  | Session | GET    | /carrito                  | Mustra el carrito del cliente en session           |      |
+  | Session | POST   | /carrito/clear            | Limpia el carrito del cliente  en session          |      |
+  | Session | POST   | /checkout                 | Realiza el pedido de la orden con los productos    |      |
+  | Admin   | GET    | /serverconfigs            | Se pueden consultar las configuraciones del server |      |
+
 Requisitos base
 
 - **Inicio:** Al momento de requerir la ruta base **&#39;/&#39;**
@@ -38,12 +49,11 @@ Requisitos base
   - Implementar al menos estas colecciones:
     - [x] **usuarios:** clientes registrados
     - [x] **productos:** catálogo completo
-      - Link para foto (puede almacenarse de modo estático en la página en una subruta **/images/:productoid** )
       - Precio unitario
       - Descripción
       - Categoría
 
-    - [ ] **mensajes:** chat del usuario (preguntas y respuestas)
+    - [x] **mensajes:** chat del usuario (preguntas y respuestas)
       - Email: del usuario que pregunta o al que se responde
       - Tipo (&#39;usuario&#39; para preguntas ó &#39;sistema&#39; para respuestas)
       - Fecha y hora
@@ -62,5 +72,5 @@ Requisitos base
       - Email de quién realizó la orden
   
 - [x] Finalizada la orden, enviar un mail a la dirección de mi cuenta con los detalles de la orden.
-- [x] Se dispondrá de un archivo de configuración externo con opciones para desarrollo y otras para producción, que serán visualizadas a través de una vista construida con handlebars. Como parámetros de configuración estará el puerto de escucha del servidor, la url de la base de datos, el mail que recibirá notificaciones del backend, tiempo de expiración de sesión y los que sea necesario incluir.
+- [x] Se dispondrá de un archivo de configuración externo con opciones para desarrollo y otras para producción, que serán visualizadas a través de una vista construida con pug
 - [ ] Vamos a contar con un canal de chat general donde el usuario enviará los mensajes en la ruta **/chat** y en **/chat/:email** podrá ver sólo los suyos. Se utilizará la colección **mensajes** en MongoDB. La tecnología de comunicación a utilizar será Websockets. El servidor implementará una vista, utilizando handlebars, para visualizar todos los mensajes y poder responder individualmente a ellos, eligiendo el email de respuesta.
