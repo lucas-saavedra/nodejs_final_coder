@@ -5,15 +5,21 @@ import MongoStore from 'connect-mongo';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import cors from 'cors'
-
+import pug from 'pug';
+import { readFile } from 'fs/promises';
 
 import getMongoDbUri from './db/mongo/getMongoDbUri.js';
 import passport from './auth/auth.js';
-import errorMiddleware from './middlewares/error.middleware.js';
+import errorResponder from './middlewares/error.middleware.js';
 import envConfig from './../env.config.js';
 import router from './routers/app.routes.js';
-import CartsApi from './api/carts.api.js';
+import errorRoutes from './routers/error.routes.js';
+
 import isAuth from './middlewares/isAuth.middleware.js';
+import isAdminAuth from './middlewares/isAdminAuth.middleware.js';
+import invalidPathHandler from './middlewares/invalidPath.middleware.js';
+
+
 
 export const app = express();
 app.use(cors())
@@ -49,9 +55,6 @@ app.use(express.static('public'));
 // Template engines
 app.set('views', path.resolve('./src/views'));
 app.set('view engine', 'ejs');
-app.get('/serverconfigs', async (req, res, next) => {
-  res.render('pug/layouts/home', { configs: envConfig })
-})
 
 app.get('/', async (req, res) => {
   const user = await req.user;
@@ -62,15 +65,25 @@ app.get('/', async (req, res) => {
     return res.sendFile(path.resolve("./public", "login.html"));
   }
 })
-app.get('/chat/:email?', isAuth, async (req, res) => {
-  return res.sendFile(path.resolve("./public", "chat.html"));
-})
-
-
 app.get('/register', async (req, res) => {
   return res.sendFile(path.resolve("./public", "register.html"));
 })
 
+app.get('/chat/', isAuth, async (req, res) => {
+  return res.sendFile(path.resolve("./public", "chat.html"));
+})
+//admin middleware
+app.get('/chat/:email', isAdminAuth, async (req, res) => {
+  return res.sendFile(path.resolve("./public", "chat.html"));
+})
+
+app.get('/serverconfigs', isAdminAuth, async (req, res, next) => {
+  const file = await readFile(path.resolve('src/views/pug/layouts/home.pug'), 'utf-8');
+  const render = pug.render(file, { configs: envConfig })
+  res.send(render)
+})
 app.use('/api', router);
-app.use(errorMiddleware);
+app.use(errorRoutes)
+app.use(errorResponder);
+app.use(invalidPathHandler)
 

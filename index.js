@@ -20,23 +20,6 @@ infoLog.info(`Listening ... => ${PORT}`);
 
 const io = new IOServer(httpServer);
 
-/* io.on("connection", (socket) => {
-
-    console.log("nuevo socket connectado:", socket.id);
-    const getMessagesApi = async () => {
-        const msgs = await this.messagesAPi.getAllApi();
-        socket.emit('server:messages', msgs)
-    }
-    getMessagesApi()
-    socket.on('client:newMessage', async (data) => {
-        await this.messagesAPi.addApi({ ...data, email: 'saav15@hotmail.es', type: 'user' });
-        const messages = await this.messagesAPi.getAllApi();
-        this.io.emit('server:messages', messages);
-    })
-    socket.on("disconnect", () => {
-        console.log(socket.id, "disconnected");
-    });
-}); */
 
 const wrap = middleware => (socket, next) => middleware(socket.request, {}, next);
 

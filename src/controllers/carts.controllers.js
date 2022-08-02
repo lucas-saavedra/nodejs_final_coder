@@ -17,6 +17,7 @@ class CartsController {
             let userCart = await this.cartApi.initUserCartApi(userId);
             return res.json({ success: true, result: userCart });
         } catch (error) {
+
             next(error);
         }
     }

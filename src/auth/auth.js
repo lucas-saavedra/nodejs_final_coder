@@ -44,7 +44,7 @@ passport.use(
             try {
                 const isUserRegistered = await userApi.getUserByUsernameApi(email);
                 if (isUserRegistered) {
-                    const error = new CustomError(409, "User already exists")
+                    const error = new CustomError(STATUS.UNAUTHORIZE, MESSAGES.UNAUTHORIZE_TOKEN)
                     return done(error);
                 }
                 const saltRounds = 10;
