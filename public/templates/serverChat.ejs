@@ -1,0 +1,35 @@
+<% const userChat='bg-success text-end' ; const serverChat='bg-secondary' ; const responseChat='bg-primary' ; %>
+    <% if (messages.length) { %>
+        <% messages.forEach(e=> { %>
+            <div class="<% if (e.type === 'user' ) { %>d-flex flex-row-reverse<% }%>">
+                <div
+                    class=" p-2 text-dark bg-opacity-25 m-1 rounded col-11  <% if (e.type === 'system' ){ %> <%= responseChat %> <% } else  { %> <%= userChat %>  <% }  %>    > ">
+                    <div class="py-1">
+                        <span class="card-text  fw-bold">
+                            <%= e.name %>
+                        </span>
+                        <span class="card-text">
+                            <a href="chat/?email=<%= e.email %>" target="_blank" rel="noopener noreferrer">
+                                <%= e.email %>
+                            </a>
+                        </span>
+                    </div>
+                    <p>
+                        <%= e.body %>
+                    </p>
+                    <span class="card-text"><small class="text-muted">
+                            <%= e.createdAt %>
+                        </small></span>
+                </div>
+
+            </div>
+
+            <% }) %>
+                <% }else{ %>
+                    <div class="col-md-12">
+                        <div class="alert alert-primary" role="alert">
+                            <p>No se encontraron mensajes.</p>
+                        </div>
+                    </div>
+                    <% }%>
+                        <div id="bottom"></div>

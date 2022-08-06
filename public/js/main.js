@@ -4,29 +4,36 @@ let socket = io();
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const paramEmail = urlParams.get('email');
+
 let userEmail;
 let userName;
-socket.on('connect', () => {
+let isAdmin = false;
 
+socket.on('connect', () => {
   socket.emit('whoami', (user) => {
     userEmail = user.email;
     userName = user.name;
     isAdmin = user.admin;
   })
-
   socket.on('server:messages', (messages) => {
+    const badge = document.querySelector("#adminBagde");
+    const submitMessage = document.querySelector("#submitMessage");
+    badge.hidden = !isAdmin;
+    submitMessage.innerHTML = isAdmin && paramEmail ? 'Responder' : 'Consultar';
     const href = window.location.origin;
-    fetch(`${href}/templates/chatList.ejs`)
+    fetch(`${href}/templates/${isAdmin ? 'serverChat' : 'clientChat'}.ejs`)
       .then(response => response.text())
       .then(data => {
-        let html;
+        let email;
         if (paramEmail) {
-          const filtered = messages.filter(msg => msg.email === paramEmail);
-          html = ejs.render(data, { messages: filtered, socketId: socket.id });
+          messages = messages.filter(msg => msg.email == paramEmail)
+          email = paramEmail;
         } else {
-          html = ejs.render(data, { messages, socketId: socket.id });
+          email = userEmail;
         }
+        const html = ejs.render(data, { messages, socketId: socket.id, email });
         document.getElementById('chatList').innerHTML = html;
+        window.location.href = "#bottom"
       });
   })
 
@@ -38,10 +45,10 @@ messageForm.addEventListener('submit', (e) => {
   socket.emit('client:newMessage', {
     socketId: socket.id,
     email: paramEmail ? paramEmail : userEmail,
-    name: userName,
+    name: paramEmail ? 'Server' : userName,
     body: document.getElementById('message').value,
     type: paramEmail ? 'system' : 'user'
   })
+  messageForm.reset()
 })
-
 
