@@ -35,11 +35,12 @@ class CartsRepo {
             return result;
         }
         const cart = await this.getUserCartPopulateRepo(userId);
-        const indexFound = cart.items.findIndex(element => element.productId.id == item.productId);
+
+        const indexFound = cart.items.findIndex(element => element._id == item.productId);
         //----------check if product exist,just add the previous quantity with the new quantity and update the total price-------
         if (indexFound !== -1) {
             cart.items[indexFound].quantity = cart.items[indexFound].quantity + item.quantity;
-            cart.items[indexFound].total = cart.items[indexFound].quantity * item.price;
+            cart.items[indexFound].total = cart.items[indexFound].quantity * cart.items[indexFound].price;
             cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
         }
         //----Check if Quantity is Greater than 0 then add item to items Array ----
@@ -58,15 +59,16 @@ class CartsRepo {
         return updatedCart;
     }
     async subtractProductToCartRepo(userId, item) {
-        const cart = await this.getUserCartPopulateRepo(userId);
+        const cart = await this.getUserCartRepo(userId);
         if (!cart) {
             throw new CustomError(
                 STATUS.BAD_REQUEST,
                 MESSAGES.CART_NOT_FOUND
             );
         }
-        const indexFound = cart.items.findIndex(element => element.productId.id == item.productId);
+        const indexFound = cart.items.findIndex(element => element._id == item.productId);
         //----------check if product exist-------//
+
         if (indexFound !== -1) {
             if (cart.items[indexFound].quantity - item.quantity <= 0) {
                 cart.items.splice(indexFound, 1);
@@ -74,8 +76,9 @@ class CartsRepo {
                     cart.subTotal = 0 :
                     cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
             } else {
+                console.log(cart.items[indexFound]);
                 cart.items[indexFound].quantity = cart.items[indexFound].quantity - item.quantity;
-                cart.items[indexFound].total = cart.items[indexFound].quantity * item.price;
+                cart.items[indexFound].total = cart.items[indexFound].quantity * cart.items[indexFound].price;
                 cart.subTotal = cart.items.map(item => item.total).reduce((acc, next) => acc + next);
             }
         }

@@ -20,6 +20,7 @@ const errorResponder = (error, req, res, next) => {
     error_details: errorItem
   };
   res.render('ejs/error.ejs', { error: errorResponse })
+  res.end();
   //return res.status(status).json(errorResponse);
 
 };

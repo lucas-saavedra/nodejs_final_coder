@@ -10,7 +10,7 @@ import cors from 'cors'
 import getMongoDbUri from './db/mongo/getMongoDbUri.js';
 import passport from './auth/auth.js';
 import errorResponder from './middlewares/error.middleware.js';
-import envConfig from './../env.config.js';
+import envConfig from '../env.config.js';
 import appRoutes from './routers/app.routes.js';
 import errorRoutes from './routers/error.routes.js';
 
@@ -53,6 +53,10 @@ app.use(express.static('public'));
 app.set('views', path.resolve('./src/views'));
 app.set('view engine', 'ejs');
 
+import swaggerUi from 'swagger-ui-express';
+import { swaggerDocument } from '../swagger.js';
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(appRoutes);
 app.use(errorRoutes)

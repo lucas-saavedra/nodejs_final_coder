@@ -25,7 +25,8 @@ class OrdersController {
                 subTotal: cart.subTotal
             }
             const result = await this.ordersApi.addApi(newOrder);
-            await sendOrderConfirmationEmail(result)
+            await sendOrderConfirmationEmail(result);
+            await this.cartsApi.clearCartApi(userId);
             return res.json({ success: true, result });
         } catch (error) {
             next(error)

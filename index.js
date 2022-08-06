@@ -33,25 +33,23 @@ io.use((socket, next) => {
     }
 });
 
+const messagesApi = new MessagesApi();
 io.on('connect', (socket) => {
-    const messagesApi = new MessagesApi();
-
+    console.log('User connected ' + socket.id);
     socket.on('whoami', (cb) => {
         cb(socket.request.user ? socket.request.user : '');
     });
     const getMessagesApi = async () => {
         const msgs = await messagesApi.getAllApi();
-        moment.locale('es')
-        const parsedDate = msgs.map((msg) => ({ ...msg, createdAt: moment(msg.createdAt).format('LLLL') }));
-        socket.emit('server:messages', parsedDate)
+        io.emit('server:messages', msgs)
     }
     getMessagesApi()
     socket.on('client:newMessage', async (data) => {
         await messagesApi.addApi({ ...data });
-        getMessagesApi()
+        await getMessagesApi()
     })
-    const session = socket.request.session;
 
+    const session = socket.request.session;
     session.socketId = socket.id;
     session.save();
 });

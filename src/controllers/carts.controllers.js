@@ -38,6 +38,7 @@ class CartsController {
                 MESSAGES.PRODUCT_NOT_FOUND
             );
             const userId = await req.user._id;
+            console.log(productDetails);
             const item = {
                 ...productDetails,
                 productId,
