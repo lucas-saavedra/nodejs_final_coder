@@ -8,9 +8,15 @@
                         <span class="card-text  fw-bold">
                             <%= e.name %>
                         </span>
-                        <span class="card-text">
-                            <%= e.email %>
-                        </span>
+                        <p class="card-text"><small class="text-muted">
+                            <% if ( e.type==='system' ) { %>
+                                En respuesta a :
+                                <% } %>
+                             
+                                        <%= e.email %>
+                                  
+                        </small>
+                    </p>
                     </div>
                     <p>
                         <%= e.body %>

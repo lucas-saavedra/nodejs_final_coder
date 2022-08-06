@@ -1,18 +1,24 @@
-<% const userChat='bg-success text-end' ; const serverChat='bg-secondary' ; const responseChat='bg-primary' ; %>
+<% const userChat='bg-success text-end col-md-11 ' ; const serverChat='bg-secondary col-md-11 ' ; const
+    responseChat='bg-primary col-md-10 ' ; %>
     <% if (messages.length) { %>
         <% messages.forEach(e=> { %>
-            <div class="<% if (e.type === 'user' ) { %>d-flex flex-row-reverse<% }%>">
+            <div class="<% if (e.email===paramEmail || e.email===userEmail) { %>d-flex flex-row-reverse<% }%>">
                 <div
-                    class=" p-2 text-dark bg-opacity-25 m-1 rounded col-11  <% if (e.type === 'system' ){ %> <%= responseChat %> <% } else  { %> <%= userChat %>  <% }  %>    > ">
+                    class=" p-2 text-dark bg-opacity-25 m-1 rounded  <% if (e.email===paramEmail && e.type === 'system' ){ %> <%= responseChat %> <% } else if (e.email===paramEmail || e.email == userEmail) { %> <%= userChat %>  <% }  else {%>  <%= serverChat %> <% } %>   > ">
                     <div class="py-1">
                         <span class="card-text  fw-bold">
                             <%= e.name %>
                         </span>
-                        <span class="card-text">
-                            <a href="chat/?email=<%= e.email %>" target="_blank" rel="noopener noreferrer">
-                                <%= e.email %>
-                            </a>
-                        </span>
+
+                        <p class="card-text"><small class="text-muted">
+                                <% if ( e.type==='system' ) { %>
+                                    En respuesta a :
+                                    <% } %>
+                                        <a href="<%= originUrl %>/chat/?email=<%= e.email %>" rel="noopener noreferrer">
+                                            <%= e.email %>
+                                        </a>
+                            </small>
+                        </p>
                     </div>
                     <p>
                         <%= e.body %>

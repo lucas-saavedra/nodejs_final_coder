@@ -27,11 +27,8 @@ socket.on('connect', () => {
         let email;
         if (paramEmail) {
           messages = messages.filter(msg => msg.email == paramEmail)
-          email = paramEmail;
-        } else {
-          email = userEmail;
         }
-        const html = ejs.render(data, { messages, socketId: socket.id, email });
+        const html = ejs.render(data, { originUrl: href, messages, socketId: socket.id, userEmail, paramEmail });
         document.getElementById('chatList').innerHTML = html;
         window.location.href = "#bottom"
       });
