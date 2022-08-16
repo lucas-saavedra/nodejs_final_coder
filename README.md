@@ -32,6 +32,7 @@ User story/brief:
   | Session | POST   | /checkout                 | Realiza el pedido de la orden con los productos    |      |
   | Admin   | GET    | /serverconfigs            | Se pueden consultar las configuraciones del server |      |
   |    | GET    | /auth/logout            | Desloguea al usuario y elimina la sesion |      |
+  |    |  | /api-docs         | Documentacion en Swagger|      |
 
 Requisitos base
 

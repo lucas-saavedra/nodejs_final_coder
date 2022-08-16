@@ -1,6 +1,4 @@
-/* 
-import { sendBuyConfirmationEmail } from '../../services/nodemailer.js';
-import { sendSmsBuyConfirmation, sendWspBuyConfirmation } from '../../services/twilio.js'; */
+
 import CartsApi from '../api/carts.api.js';
 import ProductsApi from '../api/products.api.js';
 import { MESSAGES, STATUS } from '../utils/constants.utils.js';

@@ -1,6 +1,6 @@
 import envConfig from '../../../env.config.js';
-const getMongoDbUri = (database) => {
-  return `${envConfig.MONGO_URI}/${database}?retryWrites=true&w=majority`
+const getMongoDbUri = () => {
+  return `${envConfig.MONGO_URI}`
 }
 
 export default getMongoDbUri

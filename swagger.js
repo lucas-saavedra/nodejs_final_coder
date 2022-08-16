@@ -11,6 +11,7 @@ export const swaggerDocument = {
         "http"
     ],
     "paths": {
+        
         "/auth/login": {
             "post": {
                 "tags": [],
@@ -258,94 +259,7 @@ export const swaggerDocument = {
                 "x-ms-visibility": "important"
             }
         },
-        "/productos": {
-            "get": {
-                "tags": [],
-                "summary": "GET /productos",
-                "description": "GET /productos",
-                "operationId": "GET/productos",
-                "consumes": [],
-                "parameters": [],
-                "produces": [
-                    "application/json; charset=utf-8"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "success": {
-                                    "type": "boolean",
-                                    "description": "success",
-                                    "x-ms-summary": "success"
-                                },
-                                "result": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "_id": {
-                                                "type": "string",
-                                                "description": "_id",
-                                                "x-ms-summary": "_id"
-                                            },
-                                            "name": {
-                                                "type": "string",
-                                                "description": "name",
-                                                "x-ms-summary": "name"
-                                            },
-                                            "details": {
-                                                "type": "string",
-                                                "description": "details",
-                                                "x-ms-summary": "details"
-                                            },
-                                            "url": {
-                                                "type": "string",
-                                                "description": "url",
-                                                "x-ms-summary": "url"
-                                            },
-                                            "code": {
-                                                "type": "string",
-                                                "description": "code",
-                                                "x-ms-summary": "code"
-                                            },
-                                            "category": {
-                                                "type": "string",
-                                                "description": "category",
-                                                "x-ms-summary": "category"
-                                            },
-                                            "price": {
-                                                "type": "integer",
-                                                "description": "price",
-                                                "x-ms-summary": "price"
-                                            },
-                                            "stock": {
-                                                "type": "integer",
-                                                "description": "stock",
-                                                "x-ms-summary": "stock"
-                                            },
-                                            "createdAt": {
-                                                "type": "string",
-                                                "description": "createdAt",
-                                                "x-ms-summary": "createdAt"
-                                            },
-                                            "updatedAt": {
-                                                "type": "string",
-                                                "description": "updatedAt",
-                                                "x-ms-summary": "updatedAt"
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                "deprecated": false,
-                "x-ms-visibility": "important"
-            }
-        },
+
         "/productos/": {
             "get": {
                 "tags": [],
@@ -569,16 +483,16 @@ export const swaggerDocument = {
                 "x-ms-visibility": "important"
             }
         },
-        "/productos/ssfsd": {
+        "/productos/{productId}": {
             "put": {
                 "tags": [],
-                "summary": "PUT /productos/ssfsd",
-                "description": "PUT /productos/ssfsd",
-                "operationId": "PUT/productos/ssfsd",
+                "summary": "PUT /productos/{productId}",
+                "description": "Actualiza un producto",
+                "operationId": "PUT/productos/",
                 "consumes": [],
                 "parameters": [
                     {
-                        "name": "__requested_body__",
+                        "name": "Agregar Producto",
                         "in": "body",
                         "description": "request body",
                         "x-ms-summary": "request body",
@@ -607,12 +521,12 @@ export const swaggerDocument = {
                 "x-ms-visibility": "important"
             }
         },
-        "/productos/62ec2c8ecc5af08ee35a95a9": {
+        "/productos/{productId}": {
             "delete": {
                 "tags": [],
-                "summary": "DELETE /productos/62ec2c8ecc5af08ee35a95a9",
-                "description": "DELETE /productos/62ec2c8ecc5af08ee35a95a9",
-                "operationId": "DELETE/productos/62ec2c8ecc5af08ee35a95a9",
+                "summary": "DELETE /productos/{productId}",
+                "description": "DELETE /productos/{productId}",
+                "operationId": "DELETE/productos/{productId}",
                 "consumes": [],
                 "parameters": [],
                 "produces": [
@@ -699,7 +613,7 @@ export const swaggerDocument = {
             "post": {
                 "tags": [],
                 "summary": "POST /carrito/",
-                "description": "POST /carrito/",
+                "description": "Agregar un producto al carrito en la cantidad inidicada, si el producto ya existe, se suma a la cantidad ya existente",
                 "operationId": "POST/carrito/",
                 "consumes": [],
                 "parameters": [
@@ -842,7 +756,7 @@ export const swaggerDocument = {
             "put": {
                 "tags": [],
                 "summary": "PUT /carrito/",
-                "description": "PUT /carrito/",
+                "description": "Disminuye la cantida de un producto, si la cantidad a quitar es la mayor a la cantidad actual, se elimina el producto del carrito.",
                 "operationId": "PUT/carrito/",
                 "consumes": [],
                 "parameters": [
@@ -950,12 +864,12 @@ export const swaggerDocument = {
                 "x-ms-visibility": "important"
             }
         },
-        "/carrito/62da96d08d86831761bc945d": {
+        "/carrito/{carritoId}": {
             "delete": {
                 "tags": [],
-                "summary": "DELETE /carrito/62da96d08d86831761bc945d",
-                "description": "DELETE /carrito/62da96d08d86831761bc945d",
-                "operationId": "DELETE/carrito/62da96d08d86831761bc945d",
+                "summary": "DELETE /carrito/{carritoId}",
+                "description": "DELETE /carrito/{carritoId}",
+                "operationId": "DELETE/carrito/{carritoId}",
                 "consumes": [],
                 "parameters": [],
                 "produces": [

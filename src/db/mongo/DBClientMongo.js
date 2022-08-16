@@ -3,7 +3,7 @@ import envConfig from "../../../env.config.js";
 import CustomError from "../../utils/customError.utils.js";
 import getMongoDbUri from "./getMongoDbUri.js";
 import DbClient from "../DBClient.js"
-import { infoLog } from "../../utils/loggers.utils.js";
+
 let instance;
 class MongoClient extends DbClient {
     constructor() {

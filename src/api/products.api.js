@@ -17,10 +17,7 @@ class ProductsApi {
         const product = this.productsRepo.insertRepo(element);
         return product;
     }
-   /*  async populateApi() {
-        const products = await this.productsRepo.populateRepo();
-        return products;
-    } */
+
     async updateByIdApi(id, element) {
         const updatedProduct = await this.productsRepo.updateByIdRepo(id, element);
         return updatedProduct;

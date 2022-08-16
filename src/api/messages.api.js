@@ -5,7 +5,6 @@ class MessagesApi {
     constructor() {
         this.msgsRepo = new MessagesRepo();
     }
-
     addApi = async (payload) => {
         const result = await this.msgsRepo.addRepo(payload);
         return result;

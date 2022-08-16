@@ -37,7 +37,6 @@ const {
   COOKIE_MAX_AGE,
   DB_PASSWORD,
   SECRET,
-  DATABASE,
   PORT,
   MONGO_URI,
   ADMIN_EMAIL
@@ -70,7 +69,6 @@ export default {
   MONGO_URI,
   GMAIL,
   PERSISTENCE,
-  DATABASE,
   PORT,
   DB_PASSWORD,
   SECRET,
