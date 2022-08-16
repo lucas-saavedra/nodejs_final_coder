@@ -21,14 +21,17 @@ User story/brief:
 
 ## Rutas
 
-  | AUTH    | Metodo | Ruta                      | Descripción                                        | Body |
-  | ------- | ------ | ------------------------- | -------------------------------------------------- | ---- |
+  | AUTH    | Metodo | Ruta                      | Descripción                                               | Body |
+  | ------- | ------ | ------------------------- | --------------------------------------------------------- | ---- |
+  | Session | GET    | /chat                     | Rendeiza un listado de chats del sevridor y permite escribir consultas         |      |
+  | Session | GET    | /mensajes                 | Rendeiza un listado de chats del usuario                   |      |
   | Session | GET    | /productos                | Devuelve la lista de productos                     |      |
   | Session | GET    | /productos/${producto_id} | Devuelve un producto con sus detalles por su ID    |      |
   | Session | GET    | /carrito                  | Mustra el carrito del cliente en session           |      |
   | Session | POST   | /carrito/clear            | Limpia el carrito del cliente  en session          |      |
   | Session | POST   | /checkout                 | Realiza el pedido de la orden con los productos    |      |
   | Admin   | GET    | /serverconfigs            | Se pueden consultar las configuraciones del server |      |
+  |    | GET    | /auth/logout            | Desloguea al usuario y elimina la sesion |      |
 
 Requisitos base
 

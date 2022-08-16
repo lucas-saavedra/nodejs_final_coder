@@ -21,10 +21,11 @@ socket.on('connect', () => {
     badge.hidden = !isAdmin;
     submitMessage.innerHTML = isAdmin && paramEmail ? 'Responder' : 'Consultar';
     const href = window.location.origin;
+    console.log(href);
     fetch(`${href}/templates/${isAdmin ? 'serverChat' : 'clientChat'}.ejs`)
       .then(response => response.text())
       .then(data => {
-        let email;
+
         if (paramEmail) {
           messages = messages.filter(msg => msg.email == paramEmail)
         }
